@@ -3,14 +3,19 @@ import {useState} from "preact/hooks"
 import "./app.css"
 import {scrypt} from "./lib/scrypt"
 import {makeAppPassword} from "./domain/app-passwords"
+import {LabeledInput} from "./ui/labeled-input"
 
 export function App() {
     const [userId, setUserId] = useState("")
     const [masterPassword, setMasterPassword] = useState("")
+    const [domain, setDomain] = useState("")
     const [message, setMessage] = useState("")
 
     function generatePassword() {
-        scrypt({password: masterPassword, salt: userId})
+        scrypt({
+            password: masterPassword + normalize(domain) + normalize(userId),
+            salt: userId,
+        })
             .then(makeAppPassword)
             .then((appPassword) => navigator.clipboard.writeText(appPassword))
             .then(() => setMessage("Your password has been copied to the clipboard!"))
@@ -18,19 +23,18 @@ export function App() {
     }
 
     return (
-        <div>
-            <label>
-                Your phone number (digits only, no punctuation):
-                <input type="text" value={userId} onInput={(e) => setUserId(e.currentTarget.value)} />
-            </label>
-            <label>
-                Your master password:
-                <input type="password" value={masterPassword} onInput={(e) => setMasterPassword(e.currentTarget.value)} />
-            </label>
+        <div style={{padding: 6}}>
+            <LabeledInput label="Your first name:" type="text" value={userId} onInput={setUserId} />
+            <LabeledInput label="Website you're logging into (e.g. venmo.com)" type="text" value={domain} onInput={setDomain} />
+            <LabeledInput label="Your master password:" type="password" value={masterPassword} onInput={setMasterPassword} />
             <button onClick={generatePassword}>
                 Get website password
             </button>
             <p>{message}&nbsp;</p>
         </div>
     )
+}
+
+function normalize(s: string): string {
+    return s.trim().toLowerCase()
 }
