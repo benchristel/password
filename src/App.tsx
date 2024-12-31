@@ -2,7 +2,7 @@ import {h} from "preact"
 import {useState} from "preact/hooks"
 import "./app.css"
 import {scrypt} from "./lib/scrypt"
-import {base64Encode} from "./lib/base64"
+import {makeAppPassword} from "./domain/app-passwords"
 
 export function App() {
     const [userId, setUserId] = useState("")
@@ -11,7 +11,7 @@ export function App() {
 
     function generatePassword() {
         scrypt({password: masterPassword, salt: userId})
-            .then(base64Encode)
+            .then(makeAppPassword)
             .then((appPassword) => navigator.clipboard.writeText(appPassword))
             .then(() => setMessage("Your password has been copied to the clipboard!"))
             .catch(console.error)
