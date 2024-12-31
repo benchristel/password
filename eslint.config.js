@@ -38,6 +38,7 @@ const styleRules = {
     "@stylistic/jsx-curly-spacing": ["error", {when: "never"}],
     "@stylistic/jsx-equals-spacing": ["error", "never"],
     "@stylistic/jsx-first-prop-new-line": ["error", "multiline-multiprop"],
+    "@stylistic/jsx-indent": ["error", 4, {checkAttributes: true, indentLogicalExpressions: true}],
     "@stylistic/jsx-max-props-per-line": "off",
     "@stylistic/jsx-newline": "off",
     "@stylistic/jsx-one-expression-per-line": "off",

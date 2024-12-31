@@ -20,15 +20,15 @@ export function App() {
     return (
         <div>
             <label>
-            Your phone number (digits only, no punctuation):
+                Your phone number (digits only, no punctuation):
                 <input type="text" value={userId} onInput={(e) => setUserId(e.currentTarget.value)} />
             </label>
             <label>
-            Your master password:
+                Your master password:
                 <input type="password" value={masterPassword} onInput={(e) => setMasterPassword(e.currentTarget.value)} />
             </label>
             <button onClick={generatePassword}>
-            Get website password
+                Get website password
             </button>
             <p>{message}&nbsp;</p>
         </div>
