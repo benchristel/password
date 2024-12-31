@@ -1,9 +1,6 @@
-# Preact, TypeScript, Vite, @benchristel/taste
+# password
 
-## Creating a new project from this template repo
-
-1. Click the "Use this template" button on GitHub.
-2. Clone the created repo.
+Browser-based password manager
 
 ## Development
 
